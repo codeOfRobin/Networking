@@ -151,7 +151,7 @@ public class Networking: NSObject {
     let boundary = String(format: "net.3lvis.networking.%08x%08x", arc4random(), arc4random())
 
     lazy var session: URLSession = {
-        return URLSession(configuration: self.sessionConfiguration())
+        return URLSession(configuration: self.sessionConfiguration(), delegate: self, delegateQueue: OperationQueue.main)
     }()
 
     /**
