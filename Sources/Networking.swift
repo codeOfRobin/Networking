@@ -26,7 +26,7 @@ public extension Int {
     }
 }
 
-public class Networking {
+public class Networking: NSObject {
     static let domain = "com.3lvis.networking"
 
     struct FakeRequest {
@@ -748,5 +748,11 @@ extension Networking {
         }
         print("================= ~ ==================")
         print(" ")
+    }
+}
+
+extension Networking: URLSessionDelegate {
+    public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) {
+        completionHandler(.useCredential, URLCredential(trust: challenge.protectionSpace.serverTrust!))
     }
 }
