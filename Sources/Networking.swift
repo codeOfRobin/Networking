@@ -127,7 +127,7 @@ public class Networking {
         case informational, successful, redirection, clientError, serverError, cancelled, unknown
     }
 
-    public var unauthorizedRequestCompletion: (() -> Void)?
+    public var unauthorizedRequestCallback: (() -> Void)?
 
     private let baseURL: String
     var fakeRequests = [RequestType: [String: FakeRequest]]()
@@ -693,7 +693,7 @@ extension Networking {
 
     func handleError(parameterType: ParameterType?, parameters: Any? = nil, data: Data?, request: URLRequest?, response: URLResponse?, error: NSError?) {
         if let error = error, error.code == 403 || error.code == 401{
-            self.unauthorizedRequestCompletion?()
+            self.unauthorizedRequestCallback?()
         }
 
         self.logError(parameterType: parameterType, parameters: parameters, data: data, request: request, response: response, error: error)
