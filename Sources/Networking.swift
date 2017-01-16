@@ -692,7 +692,7 @@ extension Networking {
 
 
     func handleError(parameterType: ParameterType?, parameters: Any? = nil, data: Data?, request: URLRequest?, response: URLResponse?, error: NSError?) {
-        if let error = error, error.code == 403 {
+        if let error = error, error.code == 403 || error.code == 401{
             self.unauthorizedRequestCompletion?()
         }
 
